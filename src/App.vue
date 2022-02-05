@@ -14,8 +14,8 @@
 
       <div class='links no-print'>
         <a class='separator' target='_blank' href='http://github.com/MintyOrb'>github</a>
-        <router-link class='separator' to="/resume">resume</router-link>
-        <a class='disabled'>contact</a>
+        <!-- <router-link to="/resume">resume</router-link> -->
+        <a href="static/Timothy Borny - Resume 2022.pdf" target="_blank">resume</a>
       </div>
 
       <div class='yes-print links'>
