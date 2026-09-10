@@ -19,7 +19,7 @@ Transcripts are overwhelming and noisy:
 
 ### What Actually Helps: Fast, Private Takeaways
 
-What people actually need isn't a recording—they need clear, structured notes:
+What people actually need isn't a recording: they need clear, structured notes:
 - What decisions were actually made?
 - What are the concrete next steps?
 - What questions are still unanswered?

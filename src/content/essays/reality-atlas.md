@@ -11,11 +11,11 @@ Whenever I try to research or understand a new subject, I run into the same frus
 When you look up a topic, you usually get a list of links or a short chat reply. But you can't easily see:
 - What basic foundations does this idea sit on?
 - What are the major related concepts right next to it?
-- How does it fit into the bigger picture—whether that's history, physical scale, or scientific principles?
+- How does it fit into the bigger picture (history, physical scale, or scientific principles)?
 
 ### Mapping Instead of Searching
 
-*Reality Atlas* is a project I've been exploring for a while. The goal is to build an interactive atlas of knowledge that you can zoom around in—almost like Google Maps for ideas.
+*Reality Atlas* is a project I've been exploring for a while. The goal is to build an interactive atlas of knowledge that you can zoom around in, almost like Google Maps for ideas.
 
 A few things I'm experimenting with:
 

@@ -11,7 +11,7 @@ Right now, almost every AI interface looks like a messaging app. You type a prom
 Chat is great for quick Q&A, but it gets in the way when you're actually trying to think through a complicated problem:
 - **Ideas scroll away:** Past thoughts vanish off the top of the screen.
 - **You're locked into one path:** It's awkward to compare two alternative approaches side-by-side.
-- **You're reading instead of arranging:** Deep work usually involves sorting, clustering, and paring things down—not just reading walls of text.
+- **You're reading instead of arranging:** Deep work usually involves sorting, clustering, and paring things down, not just reading walls of text.
 
 ### How We Actually Think
 
