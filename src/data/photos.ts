@@ -1,8 +1,14 @@
+// Photo interface and gallery dataset
+// TODO: When high-res originals are processed, populate camera, lens, settings, and date from EXIF
 export interface Photo {
   id: string;
   src: string;
   width: number;
   height: number;
+  camera?: string;    // e.g. "Sony α7 III"
+  lens?: string;      // e.g. "35mm f/1.8"
+  settings?: string;  // e.g. "1/500s · f/4.0 · ISO 100"
+  date?: string;      // e.g. "Oct 2024"
 }
 
 export const curatedPhotos: Photo[] = [
