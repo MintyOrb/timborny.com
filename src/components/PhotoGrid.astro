@@ -19,10 +19,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           class="photo-card"
           data-index={index}
           data-src={fullSrc}
+          style={`aspect-ratio: ${photo.width} / ${photo.height};`}
         >
           <img
             src={fullSrc}
             alt=""
+            width={photo.width}
+            height={photo.height}
             loading="lazy"
             decoding="async"
             class="gallery-img"
@@ -129,13 +132,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     position: relative;
     border-radius: var(--radius);
     overflow: hidden;
-    background: #11141a;
+    background: #14171d;
     border: 1px solid var(--border);
     cursor: zoom-in;
-    min-height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
+    width: 100%;
     transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   }
 
@@ -147,10 +148,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   .gallery-img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     display: block;
     opacity: 0;
-    transition: opacity 0.8s ease-in-out, transform 0.3s ease;
+    transition: opacity 0.7s ease-in-out, transform 0.3s ease;
   }
 
   .gallery-img.is-loaded {
