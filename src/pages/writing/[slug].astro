@@ -1,0 +1,200 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const essays = await getCollection('essays');
+  return essays.map((essay) => ({
+    params: { slug: essay.id.replace(/\.md$/, '') },
+    props: { essay },
+  }));
+}
+
+const { essay } = Astro.props;
+const { Content } = await render(essay);
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+}).format(essay.data.pubDate);
+---
+
+<BaseLayout title={`${essay.data.title} — Tim Borny`} description={essay.data.description}>
+  <article class="essay-article">
+    <div class="back-nav">
+      <a href="/writing" class="back-link">← Back to Field Notes</a>
+    </div>
+
+    <header class="essay-header">
+      <div class="essay-meta">
+        <span class="meta-date">{formattedDate}</span>
+        <span class="meta-separator">•</span>
+        <span class="meta-status">{essay.data.status}</span>
+        {essay.data.readTime && (
+          <>
+            <span class="meta-separator">•</span>
+            <span class="meta-readtime">{essay.data.readTime} read</span>
+          </>
+        )}
+      </div>
+      <h1 class="essay-title">{essay.data.title}</h1>
+      <p class="essay-desc">{essay.data.description}</p>
+    </header>
+
+    <div class="essay-content">
+      <Content />
+    </div>
+
+    <div class="essay-footer">
+      <div class="lantern-box">
+        <span class="box-icon">🏮</span>
+        <p>This is a working field note from <strong>Liminal Lantern</strong>. Ideas are exploratory and subject to iteration.</p>
+        <a href={`mailto:hello@timborny.com?subject=Re: ${encodeURIComponent(essay.data.title)}`} class="reply-button">Send a Thought via Email →</a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .essay-article {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .back-nav {
+    margin-bottom: 2rem;
+  }
+
+  .back-link {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    transition: color 0.15s ease;
+  }
+
+  .back-link:hover {
+    color: var(--lantern);
+  }
+
+  .essay-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .essay-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-bottom: 0.75rem;
+  }
+
+  .meta-status {
+    color: var(--lantern);
+    background: var(--lantern-glow);
+    padding: 0.1rem 0.45rem;
+    border-radius: 4px;
+    font-size: 0.72rem;
+  }
+
+  .essay-title {
+    font-size: 2.1rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .essay-desc {
+    font-size: 1.12rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .essay-content {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #e2e8f0;
+  }
+
+  .essay-content :global(h2) {
+    font-size: 1.45rem;
+    margin: 2.5rem 0 1rem;
+    padding-top: 1rem;
+    color: #ffffff;
+  }
+
+  .essay-content :global(h3) {
+    font-size: 1.2rem;
+    margin: 2rem 0 0.75rem;
+    color: #ffffff;
+  }
+
+  .essay-content :global(p) {
+    margin-bottom: 1.4rem;
+    color: #cbd5e1;
+  }
+
+  .essay-content :global(ul), .essay-content :global(ol) {
+    margin: 1rem 0 1.5rem 1.5rem;
+    color: #cbd5e1;
+  }
+
+  .essay-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .essay-content :global(blockquote) {
+    border-left: 3px solid var(--lantern);
+    padding-left: 1.25rem;
+    margin: 1.5rem 0;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .essay-footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .lantern-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .box-icon {
+    font-size: 1.5rem;
+  }
+
+  .lantern-box p {
+    font-size: 0.92rem;
+    margin: 0;
+    max-width: 480px;
+  }
+
+  .reply-button {
+    margin-top: 0.5rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--lantern);
+    background: var(--lantern-glow);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    transition: all 0.15s ease;
+  }
+
+  .reply-button:hover {
+    background: rgba(245, 158, 11, 0.22);
+    transform: translateY(-1px);
+  }
+</style>

@@ -1,0 +1,512 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PhotoGrid from '../components/PhotoGrid.astro';
+
+const essays = await getCollection('essays');
+const sortedEssays = essays.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout
+  title="Tim Borny — Liminal Lantern"
+  description="Designing and building at the thresholds of human thought, cognitive interfaces, and visual cartography."
+>
+  <!-- Hero Section -->
+  <section class="hero lantern-aura">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      <span>Liminal Lantern</span>
+    </div>
+    <h1 class="hero-title">Tim Borny</h1>
+    <p class="hero-lead">
+      I design and build at the thresholds of <strong>human thought</strong> and <strong>computational intelligence</strong>. My work centers on AI interfaces, tools for thought, and visual cartography to help humans navigate complex information.
+    </p>
+    <p class="hero-sublead">
+      Emitting field notes and working prototypes to make the world more legible.
+    </p>
+    <div class="hero-actions">
+      <a href="#lantern" class="btn btn-primary">Field Notes 🏮</a>
+      <a href="#workbench" class="btn btn-secondary">Active Workbench →</a>
+    </div>
+  </section>
+
+  <!-- Section 1: Liminal Lantern (Field Notes & Essays) -->
+  <section id="lantern" class="section">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-glyph">🏮</span>
+        <div>
+          <h2 class="section-title">Liminal Lantern</h2>
+          <span class="section-subtitle">Field notes on tools for thought, intelligent interfaces, and mapping reality.</span>
+        </div>
+      </div>
+      <a href="/writing" class="section-link">All Notes ({sortedEssays.length}) →</a>
+    </div>
+
+    <div class="manifesto-card">
+      <p class="manifesto-quote">
+        <em>"Put out enough light for the right people to find me, and follow the lights that help me find them."</em>
+      </p>
+    </div>
+
+    <div class="essays-feed">
+      {sortedEssays.map((essay) => {
+        const slug = essay.id.replace(/\.md$/, '');
+        const formattedDate = new Intl.DateTimeFormat('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        }).format(essay.data.pubDate);
+
+        return (
+          <a href={`/writing/${slug}`} class="essay-card card">
+            <div class="essay-meta">
+              <span class="meta-date">{formattedDate}</span>
+              <span class="badge-status">{essay.data.status}</span>
+              {essay.data.readTime && <span class="meta-read">{essay.data.readTime}</span>}
+            </div>
+            <h3 class="essay-card-title">{essay.data.title}</h3>
+            <p class="essay-card-desc">{essay.data.description}</p>
+            <span class="essay-cta">Read note →</span>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <hr />
+
+  <!-- Section 2: The Workbench (Active Projects) -->
+  <section id="workbench" class="section">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-glyph">⚡</span>
+        <div>
+          <h2 class="section-title">The Workbench</h2>
+          <span class="section-subtitle">Active systems making knowledge, conversations, and communities legible.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <ProjectCard
+        tag="Knowledge Legibility"
+        title="Deep Breadth & Reality Atlas"
+        subtitle="Shortest paths to the deepest insights"
+        description="A multi-scale cartography engine that navigates knowledge across deep time, cosmic scales, and interconnected concept lattices without flattening them into disjointed search results."
+        status="Active Prototype"
+        link="/writing/reality-atlas"
+        linkText="Read Architecture Note →"
+      />
+
+      <ProjectCard
+        tag="Experiential Legibility"
+        title="Conversation Memory Apps"
+        subtitle="Dialogue into structured cognitive memory"
+        description="Turning high-stakes spoken dialogue—medical visits, therapy, and family reflection—into retrievable decision artifacts. Built local-first with zero server audio retention and sovereign privacy."
+        status="In Development"
+        link="/writing/audio-is-not-memory"
+        linkText="Read Product Thesis →"
+      />
+
+      <ProjectCard
+        tag="Civic Legibility"
+        title="WeLiveHere"
+        subtitle="Making cities and neighborhoods legible"
+        description="An open civic discovery platform aggregating fragmented local events, community organizations, venues, and third places into an interconnected community graph."
+        status="In Progress"
+      />
+
+      <ProjectCard
+        tag="Visual Craft Engine"
+        title="Interactive Visualization & Explanation"
+        subtitle="Simulating complex adaptive systems"
+        description="Direct-manipulation interfaces and visual explainers of complex domains: logarithmic cosmic scales, stellar evolution, and dynamical systems."
+        status="Ongoing Practice"
+        link="/photography"
+        linkText="Explore Visual Eye →"
+      />
+    </div>
+  </section>
+
+  <hr />
+
+  <!-- Section 3: Visual Perception & Photography Preview -->
+  <section id="photography-preview" class="section">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-glyph">📷</span>
+        <div>
+          <h2 class="section-title">Visual Perception & Terrain</h2>
+          <span class="section-subtitle">Training the eye for light, spatial framing, and geographical scale.</span>
+        </div>
+      </div>
+      <a href="/photography" class="section-link">View Full Gallery (60+ shots) →</a>
+    </div>
+
+    <p class="section-intro">
+      Outside software and cognitive interfaces, I spend time in the physical world—trail running, backpacking, ski touring, and photographing mountain terrain and architectural form.
+    </p>
+
+    <PhotoGrid limit={6} />
+
+    <div class="gallery-more-cta">
+      <a href="/photography" class="btn btn-secondary">Explore Complete Photography Archive →</a>
+    </div>
+  </section>
+
+  <hr />
+
+  <!-- Section 4: About & Human Grounding -->
+  <section id="about" class="section">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-glyph">🧭</span>
+        <div>
+          <h2 class="section-title">About & Philosophy</h2>
+          <span class="section-subtitle">Grounded in human capability and physical reality.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-content">
+      <p class="lead">
+        I believe the central design challenge of our era is <strong>legibility</strong>: how do we orient ourselves in a world of exponential computational output without surrendering human agency?
+      </p>
+      <p>
+        The answer is not more noise or passive consumption. It is building tools that strengthen, clarify, and extend human cognition—making complex systems transparent and navigable.
+      </p>
+      <p>
+        When away from screens and design canvases, you will find me running rugged singletrack trails, backpacking high alpine passes, skiing backcountry lines, exploring harmony and systems on guitar, or playing pickleball with friends.
+      </p>
+    </div>
+  </section>
+
+  <hr />
+
+  <!-- Section 5: Connect & Shared Light -->
+  <section id="connect" class="section">
+    <div class="connect-card card">
+      <h2 class="connect-title">Connect & Follow the Light</h2>
+      <p class="connect-desc">
+        If you are working on cognitive tools, dynamic media, local-first software, or visual cartography, I would love to hear from you.
+      </p>
+      <div class="connect-links">
+        <a href="https://bsky.app/profile/timborny.bsky.social" target="_blank" rel="noopener noreferrer" class="connect-btn">
+          Bluesky
+        </a>
+        <a href="https://linkedin.com/in/timborny" target="_blank" rel="noopener noreferrer" class="connect-btn">
+          LinkedIn
+        </a>
+        <a href="https://github.com/MintyOrb" target="_blank" rel="noopener noreferrer" class="connect-btn">
+          GitHub
+        </a>
+        <a href="/rss.xml" class="connect-btn">
+          RSS Feed
+        </a>
+        <a href="mailto:hello@timborny.com" class="connect-btn primary">
+          Email Me →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero Styles */
+  .hero {
+    padding: 3rem 0 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--lantern);
+    background: var(--lantern-glow);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    margin-bottom: 1.25rem;
+    line-height: 1.1;
+  }
+
+  .hero-lead {
+    font-size: 1.22rem;
+    line-height: 1.6;
+    color: var(--text);
+    max-width: 680px;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-sublead {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 620px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.65rem 1.25rem;
+    border-radius: var(--radius);
+    transition: all 0.15s ease;
+  }
+
+  .btn-primary {
+    background: var(--lantern);
+    color: #0d0f12;
+    font-weight: 600;
+  }
+
+  .btn-primary:hover {
+    background: #fbbf24;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+  }
+
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--border-light);
+    background: var(--surface-hover);
+    transform: translateY(-1px);
+  }
+
+  /* Section Styles */
+  .section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title-wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .section-glyph {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.3));
+  }
+
+  .section-title {
+    font-size: 1.65rem;
+    letter-spacing: -0.015em;
+  }
+
+  .section-subtitle {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 0.2rem;
+  }
+
+  .section-link {
+    font-size: 0.85rem;
+    color: var(--lantern);
+    font-weight: 500;
+  }
+
+  .section-link:hover {
+    text-decoration: underline;
+  }
+
+  .section-intro {
+    font-size: 0.98rem;
+    color: var(--text-muted);
+    max-width: 640px;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Manifesto Card */
+  .manifesto-card {
+    background: rgba(245, 158, 11, 0.05);
+    border: 1px dashed rgba(245, 158, 11, 0.3);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .manifesto-quote {
+    color: var(--lantern);
+    font-size: 0.98rem;
+    margin: 0;
+    text-align: center;
+  }
+
+  /* Essays Feed */
+  .essays-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .essay-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    text-decoration: none;
+  }
+
+  .essay-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+
+  .badge-status {
+    color: var(--lantern);
+    background: var(--lantern-glow);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+  }
+
+  .essay-card-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+    transition: color 0.15s ease;
+  }
+
+  .essay-card:hover .essay-card-title {
+    color: var(--lantern);
+  }
+
+  .essay-card-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .essay-cta {
+    font-size: 0.82rem;
+    color: var(--lantern);
+    font-weight: 500;
+    margin-top: 0.35rem;
+  }
+
+  .gallery-more-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  /* About Content */
+  .about-content {
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  /* Connect Card */
+  .connect-card {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(180deg, var(--surface) 0%, rgba(20, 23, 30, 0.9) 100%);
+    border-color: rgba(245, 158, 11, 0.2);
+  }
+
+  .connect-title {
+    font-size: 1.5rem;
+  }
+
+  .connect-desc {
+    max-width: 520px;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .connect-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .connect-btn {
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    background: var(--surface-hover);
+    border: 1px solid var(--border);
+    color: var(--text);
+    transition: all 0.15s ease;
+  }
+
+  .connect-btn:hover {
+    border-color: var(--border-light);
+    color: var(--lantern);
+    transform: translateY(-1px);
+  }
+
+  .connect-btn.primary {
+    background: var(--lantern);
+    color: #0d0f12;
+    border-color: var(--lantern);
+    font-weight: 600;
+  }
+
+  .connect-btn.primary:hover {
+    background: #fbbf24;
+    color: #0d0f12;
+  }
+
+  @media (max-width: 600px) {
+    .hero-title {
+      font-size: 2.3rem;
+    }
+    .hero-lead {
+      font-size: 1.1rem;
+    }
+  }
+</style>

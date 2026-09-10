@@ -1,0 +1,84 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-quote">
+      <span class="lantern-glyph">🏮</span>
+      <em>"Put out enough light for the right people to find me, and follow the lights that help me find them."</em>
+    </div>
+
+    <div class="footer-links">
+      <a href="https://bsky.app/profile/timborny.bsky.social" target="_blank" rel="noopener noreferrer">Bluesky</a>
+      <a href="https://linkedin.com/in/timborny" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://github.com/MintyOrb" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="/rss.xml">RSS Feed</a>
+      <a href="mailto:hello@timborny.com">Email</a>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {new Date().getFullYear()} Tim Borny</span>
+      <span class="dot">•</span>
+      <span>Liminal Lantern</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    padding: 3rem 1.5rem 4rem;
+    margin-top: auto;
+  }
+
+  .footer-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.75rem;
+  }
+
+  .footer-quote {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    max-width: 540px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .lantern-glyph {
+    font-size: 1.1rem;
+    filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.4));
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+    font-size: 0.88rem;
+  }
+
+  .footer-links a {
+    color: var(--text-muted);
+  }
+
+  .footer-links a:hover {
+    color: var(--lantern);
+  }
+
+  .footer-bottom {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .dot {
+    opacity: 0.4;
+  }
+</style>

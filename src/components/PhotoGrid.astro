@@ -1,0 +1,180 @@
+---
+import { curatedPhotos } from '../data/photos';
+
+interface Props {
+  limit?: number;
+}
+
+const { limit } = Astro.props;
+const displayPhotos = limit ? curatedPhotos.slice(0, limit) : curatedPhotos;
+---
+
+<div class="photo-gallery">
+  <div class="gallery-grid">
+    {displayPhotos.map((photo, index) => (
+      <figure class="photo-card" data-src={photo.src} data-alt={photo.alt}>
+        <img
+          src={photo.src}
+          alt={photo.alt}
+          loading="lazy"
+          decoding="async"
+          class="gallery-img"
+        />
+        <figcaption class="photo-caption">{photo.alt}</figcaption>
+      </figure>
+    ))}
+  </div>
+
+  <!-- Native Lightbox Dialog -->
+  <dialog id="photo-lightbox" class="lightbox-dialog">
+    <button id="close-lightbox" class="lightbox-close" aria-label="Close dialog">✕</button>
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="" />
+      <p id="lightbox-caption" class="lightbox-desc"></p>
+    </div>
+  </dialog>
+</div>
+
+<script>
+  const dialog = document.getElementById('photo-lightbox') as HTMLDialogElement;
+  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lightboxCaption = document.getElementById('lightbox-caption') as HTMLParagraphElement;
+  const closeBtn = document.getElementById('close-lightbox');
+
+  const cards = document.querySelectorAll('.photo-card');
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const src = card.getAttribute('data-src');
+      const alt = card.getAttribute('data-alt');
+      if (src && dialog && lightboxImg) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || '';
+        if (lightboxCaption) lightboxCaption.textContent = alt || '';
+        dialog.showModal();
+      }
+    });
+  });
+
+  closeBtn?.addEventListener('click', () => dialog?.close());
+  dialog?.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+</script>
+
+<style>
+  .gallery-grid {
+    column-count: 1;
+    column-gap: 1.25rem;
+  }
+
+  @media (min-width: 540px) {
+    .gallery-grid {
+      column-count: 2;
+    }
+  }
+
+  @media (min-width: 860px) {
+    .gallery-grid {
+      column-count: 3;
+    }
+  }
+
+  .photo-card {
+    break-inside: avoid;
+    margin-bottom: 1.25rem;
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    cursor: zoom-in;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .photo-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(245, 158, 11, 0.4);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .gallery-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .photo-card:hover .gallery-img {
+    transform: scale(1.02);
+  }
+
+  .photo-caption {
+    display: none;
+  }
+
+  /* Native Lightbox Dialog */
+  .lightbox-dialog {
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: rgba(13, 15, 18, 0.95);
+    backdrop-filter: blur(16px);
+    color: var(--text);
+    max-width: 90vw;
+    max-height: 90vh;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  }
+
+  .lightbox-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+  }
+
+  .lightbox-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+  }
+
+  .lightbox-content img {
+    max-width: 100%;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: var(--radius);
+  }
+
+  .lightbox-desc {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    font-style: italic;
+    text-align: center;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--text);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease;
+    z-index: 10;
+  }
+
+  .lightbox-close:hover {
+    background: rgba(245, 158, 11, 0.3);
+    color: var(--lantern);
+  }
+</style>

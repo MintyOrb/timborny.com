@@ -1,0 +1,130 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const essays = await getCollection('essays');
+const sortedEssays = essays.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout title="Field Notes & Essays — Tim Borny" description="Field notes on tools for thought, intelligent interfaces, and mapping reality.">
+  <div class="writing-container">
+    <header class="page-header">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Liminal Lantern Dispatches
+      </div>
+      <h1 class="page-title">Field Notes & Essays</h1>
+      <p class="page-desc">
+        Explorations on cognitive tools, spatial AI interfaces, and multi-scale reality mapping.
+      </p>
+    </header>
+
+    <div class="essays-list">
+      {sortedEssays.map((essay) => {
+        const slug = essay.id.replace(/\.md$/, '');
+        const formattedDate = new Intl.DateTimeFormat('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        }).format(essay.data.pubDate);
+
+        return (
+          <a href={`/writing/${slug}`} class="essay-item card">
+            <div class="item-meta">
+              <span class="item-date">{formattedDate}</span>
+              <span class="item-status">{essay.data.status}</span>
+              {essay.data.readTime && <span class="item-read">{essay.data.readTime} read</span>}
+            </div>
+            <h2 class="item-title">{essay.data.title}</h2>
+            <p class="item-desc">{essay.data.description}</p>
+            <span class="read-more">Read note →</span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .writing-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .page-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .page-title {
+    font-size: 2.2rem;
+    letter-spacing: -0.02em;
+  }
+
+  .page-desc {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 580px;
+    margin: 0;
+  }
+
+  .essays-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .essay-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    text-decoration: none;
+  }
+
+  .item-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+  }
+
+  .item-status {
+    color: var(--lantern);
+    background: var(--lantern-glow);
+    padding: 0.1rem 0.45rem;
+    border-radius: 4px;
+  }
+
+  .item-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text);
+    transition: color 0.15s ease;
+  }
+
+  .essay-item:hover .item-title {
+    color: var(--lantern);
+  }
+
+  .item-desc {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .read-more {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--lantern);
+    margin-top: 0.4rem;
+  }
+</style>

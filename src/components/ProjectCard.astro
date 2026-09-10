@@ -1,0 +1,127 @@
+---
+interface Props {
+  tag: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  status: string;
+  link?: string;
+  linkText?: string;
+}
+
+const { tag, title, subtitle, description, status, link, linkText = "Explore →" } = Astro.props;
+---
+
+<article class="project-card card">
+  <div class="card-header">
+    <span class="category-tag">{tag}</span>
+    <span class="status-badge">
+      <span class="status-dot"></span>
+      {status}
+    </span>
+  </div>
+
+  <h3 class="card-title">{title}</h3>
+  <div class="card-subtitle">{subtitle}</div>
+  <p class="card-desc">{description}</p>
+
+  {link && (
+    <div class="card-footer">
+      <a href={link} class="card-link">
+        {linkText}
+      </a>
+    </div>
+  )}
+</article>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.85rem;
+  }
+
+  .category-tag {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    font-weight: 600;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.72rem;
+    color: var(--lantern);
+    background: var(--lantern-glow);
+    padding: 0.15rem 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(245, 158, 11, 0.2);
+  }
+
+  .status-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--lantern);
+    box-shadow: 0 0 5px var(--lantern);
+  }
+
+  .card-title {
+    font-size: 1.18rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.01em;
+  }
+
+  .card-subtitle {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--lantern);
+    margin-bottom: 0.75rem;
+  }
+
+  .card-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+    flex-grow: 1;
+  }
+
+  .card-footer {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .card-link {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: color 0.15s ease, transform 0.15s ease;
+  }
+
+  .card-link:hover {
+    color: var(--lantern);
+    transform: translateX(2px);
+  }
+</style>
