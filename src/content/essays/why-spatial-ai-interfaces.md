@@ -1,27 +1,27 @@
 ---
-title: "Beyond the Chatbox: Why We Need Spatial AI Interfaces"
-description: "Conversational text streams are an impoverished medium for thought. How spatial canvases and direct manipulation restore human agency."
+title: "Beyond the Chatbox"
+description: "Why thinking on a canvas beats scrolling through an endless column of chat bubbles."
 pubDate: 2026-08-28
-status: "Sprout"
+status: "Working Note"
 readTime: "3 min"
 ---
 
-The dominant paradigm for interacting with frontier models is the chatbox: a vertical messaging thread mimicking SMS or IRC.
+Right now, almost every AI interface looks like a messaging app. You type a prompt into a box, wait a few seconds, and get a column of paragraphs that pushes everything you just worked on up into the scroll history.
 
-While conversational dialogue is approachable, it is fundamentally constrained as a medium for rigorous thinking:
-- **Ephemeral context:** Past thoughts scroll off into the abyss.
-- **Single-track focus:** You can only explore one branch of reasoning at a time.
-- **Passive reading vs. active restructuring:** You are forced to read paragraphs instead of manipulating conceptual objects.
+Chat is great for quick Q&A, but it gets in the way when you're actually trying to think through a complicated problem:
+- **Ideas scroll away:** Past thoughts vanish off the top of the screen.
+- **You're locked into one path:** It's awkward to compare two alternative approaches side-by-side.
+- **You're reading instead of arranging:** Deep work usually involves sorting, clustering, and paring things down—not just reading walls of text.
 
-### Restoring Spatial Memory
+### How We Actually Think
 
-Humans did not evolve to think through infinite vertical feeds. Our cognition is deeply rooted in spatial navigation, physical orientation, and visual grouping.
+When people work through messy problems in the real world, they usually grab a whiteboard or spread papers out on a desk:
+- You put competing ideas next to each other to compare them.
+- You sketch lines and arrows between related thoughts.
+- You keep key context in your peripheral vision while digging into one detail.
 
-When we work on a physical whiteboard or desk:
-- We place competing hypotheses side-by-side.
-- We cluster related evidence into distinct spatial territories.
-- We maintain peripheral awareness of adjacent concepts while focusing deeply on one node.
+### Canvases Over Chat
 
-### The Spatial AI Canvas
+Instead of having a model talk back to you in chat bubbles, what if it helped you build a visual workspace?
 
-In *Liminal Lantern*, we are prototyping interfaces where models act not as conversational bots, but as responsive canvas instruments. Rather than generating text into an endless chat stream, AI tools should generate malleable cards, live graphs, and zoomable maps that human operators can reposition, cluster, prune, and annotate.
+Imagine an open canvas where outputs appear as cards you can move around, group, connect, or edit directly. The software helps generate options, but you stay in control of the space and how the pieces fit together.

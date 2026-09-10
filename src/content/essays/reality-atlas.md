@@ -1,28 +1,26 @@
 ---
-title: "Reality Atlas: Shortest Paths to the Deepest Insights"
-description: "Exploring multi-scale representations of knowledge, deep time, and complex systems beyond flat chronological feeds."
+title: "Reality Atlas: Building Maps for Ideas"
+description: "Why search boxes give you isolated answers instead of context, and how zoomable maps can help connect the dots."
 pubDate: 2026-09-08
-status: "In Progress"
-readTime: "4 min"
+status: "Working Draft"
+readTime: "3 min"
 ---
 
-Most information architecture forces a brutal trade-off between **linear narrative** (easy to consume, impossible to cross-reference) and **search boxes** (flexible lookup, zero spatial orientation).
+Whenever I try to research or understand a new subject, I run into the same frustration: search engines give you isolated answers, but they don't give you a map.
 
-When you search for an idea in an LLM chatbox or search engine, you receive a flat slice of text stripped of its ontological terrain. You don't see what lies north of it, what foundational assumptions lie beneath it, or what alternate perspectives branch off from it.
+When you look up a topic, you usually get a list of links or a short chat reply. But you can't easily see:
+- What basic foundations does this idea sit on?
+- What are the major related concepts right next to it?
+- How does it fit into the bigger picture—whether that's history, physical scale, or scientific principles?
 
-### The Problem of Cognitive Flattening
+### Mapping Instead of Searching
 
-We live surrounded by flat feeds and chronological streams. But reality is not a timeline; it is an interconnected lattice across scales:
-- From the Planck length up to the observable universe.
-- From the Big Bang through stellar nucleosynthesis, biological evolution, and modern human history.
-- From core mathematical axioms to applied human systems.
+*Reality Atlas* is a project I've been exploring for a while. The goal is to build an interactive atlas of knowledge that you can zoom around in—almost like Google Maps for ideas.
 
-### The Reality Atlas Thesis
+A few things I'm experimenting with:
 
-*Reality Atlas* is an inquiry into multi-dimensional knowledge cartography. Rather than forcing ideas into hierarchical outlines or disjointed chat logs, it organizes knowledge through:
+1. **Zooming across scales:** Jumping smoothly between cosmic scales, everyday human scales, and molecular or quantum scales without losing where you are.
+2. **Browsing deep time:** Viewing history logarithmically so 13.8 billion years of cosmic evolution and the last 100 years of modern technology can be explored on one continuous timeline.
+3. **Connecting related ideas:** Seeing how principles in one field (like biology or music theory) echo patterns in another (like computing or physics).
 
-1. **Continuous Zoom Across Scales:** Transition seamlessly between cosmic, planetary, human, and quantum dimensions without losing context.
-2. **Logarithmic Time Navigation:** Compressing 13.8 billion years of cosmic history into navigable epochs, showing how human civilization sits on deep time.
-3. **Concept Adjacencies:** Mapping how principles in distributed systems echo natural ecosystems, or how music theory mirrors mathematical proportion.
-
-The goal is simple: **finding the shortest paths to the deepest insights.**
+The goal isn't to replace books or search engines, but to give people a clear, spatial way to explore how ideas fit together.

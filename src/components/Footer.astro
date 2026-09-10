@@ -6,22 +6,20 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <div class="footer-inner">
     <img src={`${base}/tb.png`} alt="" class="footer-monogram" />
 
-    <div class="footer-quote">
-      <em>"How do we orient ourselves in a complicated world? By building technology that strengthens rather than replaces human capability."</em>
+    <div class="footer-text">
+      <p>Building software, exploring interfaces, and spending time outside.</p>
     </div>
 
     <div class="footer-links">
       <a href="https://bsky.app/profile/timborny.bsky.social" target="_blank" rel="noopener noreferrer">Bluesky</a>
       <a href="https://linkedin.com/in/timborny" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="https://github.com/MintyOrb" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href={`${base}/rss.xml`}>RSS Feed</a>
+      <a href={`${base}/rss.xml`}>RSS</a>
       <a href="mailto:hello@timborny.com">Email</a>
     </div>
 
     <div class="footer-bottom">
       <span>© {new Date().getFullYear()} Tim Borny</span>
-      <span class="dot">•</span>
-      <span>Tools for Thought &amp; Visual Cartography</span>
     </div>
   </div>
 </footer>
@@ -30,7 +28,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   .site-footer {
     border-top: 1px solid var(--border);
     background: var(--surface);
-    padding: 3rem 1.5rem 4rem;
+    padding: 3rem 1.5rem 3.5rem;
     margin-top: auto;
   }
 
@@ -41,13 +39,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   .footer-monogram {
-    width: 28px;
-    height: 28px;
-    opacity: 0.65;
+    width: 24px;
+    height: 24px;
+    opacity: 0.6;
     transition: opacity 0.2s ease, transform 0.2s ease;
   }
 
@@ -56,11 +54,16 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     transform: scale(1.1);
   }
 
-  .footer-quote {
-    font-size: 0.95rem;
+  .footer-text {
+    font-size: 0.92rem;
     color: var(--text-muted);
-    max-width: 580px;
-    line-height: 1.6;
+    max-width: 480px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .footer-text p {
+    margin: 0;
   }
 
   .footer-links {
@@ -82,12 +85,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   .footer-bottom {
     font-size: 0.78rem;
     color: var(--text-dim);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .dot {
-    opacity: 0.4;
+    margin-top: 0.5rem;
   }
 </style>
