@@ -8,48 +8,42 @@ const essays = await getCollection('essays');
 const sortedEssays = essays.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <BaseLayout
-  title="Tim Borny — Liminal Lantern"
+  title="Tim Borny"
   description="Designing and building at the thresholds of human thought, cognitive interfaces, and visual cartography."
 >
   <!-- Hero Section -->
   <section class="hero lantern-aura">
     <div class="hero-badge">
       <span class="badge-dot"></span>
-      <span>Liminal Lantern</span>
+      <span>Digital Garden &amp; Inquiries</span>
     </div>
     <h1 class="hero-title">Tim Borny</h1>
     <p class="hero-lead">
       I design and build at the thresholds of <strong>human thought</strong> and <strong>computational intelligence</strong>. My work centers on AI interfaces, tools for thought, and visual cartography to help humans navigate complex information.
     </p>
     <p class="hero-sublead">
-      Emitting field notes and working prototypes to make the world more legible.
+      Field notes, essays, and working prototypes to make the world more legible.
     </p>
     <div class="hero-actions">
-      <a href="#lantern" class="btn btn-primary">Field Notes 🏮</a>
-      <a href="#workbench" class="btn btn-secondary">Active Workbench →</a>
+      <a href="#notes" class="btn btn-primary">Field Notes &amp; Essays</a>
+      <a href="#workbench" class="btn btn-secondary">The Workbench →</a>
     </div>
   </section>
 
-  <!-- Section 1: Liminal Lantern (Field Notes & Essays) -->
-  <section id="lantern" class="section">
+  <!-- Section 1: Notes & Essays -->
+  <section id="notes" class="section">
     <div class="section-header">
       <div class="section-title-wrap">
-        <span class="section-glyph">🏮</span>
         <div>
-          <h2 class="section-title">Liminal Lantern</h2>
-          <span class="section-subtitle">Field notes on tools for thought, intelligent interfaces, and mapping reality.</span>
+          <h2 class="section-title">Field Notes &amp; Inquiries</h2>
+          <span class="section-subtitle">Essays on tools for thought, intelligent interfaces, and mapping reality.</span>
         </div>
       </div>
-      <a href="/writing" class="section-link">All Notes ({sortedEssays.length}) →</a>
-    </div>
-
-    <div class="manifesto-card">
-      <p class="manifesto-quote">
-        <em>"Put out enough light for the right people to find me, and follow the lights that help me find them."</em>
-      </p>
+      <a href={`${base}/writing`} class="section-link">All Notes ({sortedEssays.length}) →</a>
     </div>
 
     <div class="essays-feed">
@@ -62,7 +56,7 @@ const sortedEssays = essays.sort(
         }).format(essay.data.pubDate);
 
         return (
-          <a href={`/writing/${slug}`} class="essay-card card">
+          <a href={`${base}/writing/${slug}`} class="essay-card card">
             <div class="essay-meta">
               <span class="meta-date">{formattedDate}</span>
               <span class="badge-status">{essay.data.status}</span>
@@ -83,7 +77,6 @@ const sortedEssays = essays.sort(
   <section id="workbench" class="section">
     <div class="section-header">
       <div class="section-title-wrap">
-        <span class="section-glyph">⚡</span>
         <div>
           <h2 class="section-title">The Workbench</h2>
           <span class="section-subtitle">Active systems making knowledge, conversations, and communities legible.</span>
@@ -94,11 +87,11 @@ const sortedEssays = essays.sort(
     <div class="grid-2">
       <ProjectCard
         tag="Knowledge Legibility"
-        title="Deep Breadth & Reality Atlas"
+        title="Deep Breadth &amp; Reality Atlas"
         subtitle="Shortest paths to the deepest insights"
         description="A multi-scale cartography engine that navigates knowledge across deep time, cosmic scales, and interconnected concept lattices without flattening them into disjointed search results."
         status="Active Prototype"
-        link="/writing/reality-atlas"
+        link={`${base}/writing/reality-atlas`}
         linkText="Read Architecture Note →"
       />
 
@@ -108,7 +101,7 @@ const sortedEssays = essays.sort(
         subtitle="Dialogue into structured cognitive memory"
         description="Turning high-stakes spoken dialogue—medical visits, therapy, and family reflection—into retrievable decision artifacts. Built local-first with zero server audio retention and sovereign privacy."
         status="In Development"
-        link="/writing/audio-is-not-memory"
+        link={`${base}/writing/audio-is-not-memory`}
         linkText="Read Product Thesis →"
       />
 
@@ -122,11 +115,11 @@ const sortedEssays = essays.sort(
 
       <ProjectCard
         tag="Visual Craft Engine"
-        title="Interactive Visualization & Explanation"
+        title="Interactive Visualization &amp; Explanation"
         subtitle="Simulating complex adaptive systems"
         description="Direct-manipulation interfaces and visual explainers of complex domains: logarithmic cosmic scales, stellar evolution, and dynamical systems."
         status="Ongoing Practice"
-        link="/photography"
+        link={`${base}/photography`}
         linkText="Explore Visual Eye →"
       />
     </div>
@@ -138,13 +131,12 @@ const sortedEssays = essays.sort(
   <section id="photography-preview" class="section">
     <div class="section-header">
       <div class="section-title-wrap">
-        <span class="section-glyph">📷</span>
         <div>
-          <h2 class="section-title">Visual Perception & Terrain</h2>
+          <h2 class="section-title">Visual Perception &amp; Terrain</h2>
           <span class="section-subtitle">Training the eye for light, spatial framing, and geographical scale.</span>
         </div>
       </div>
-      <a href="/photography" class="section-link">View Full Gallery (60+ shots) →</a>
+      <a href={`${base}/photography`} class="section-link">View Full Gallery (60+ shots) →</a>
     </div>
 
     <p class="section-intro">
@@ -154,19 +146,18 @@ const sortedEssays = essays.sort(
     <PhotoGrid limit={6} />
 
     <div class="gallery-more-cta">
-      <a href="/photography" class="btn btn-secondary">Explore Complete Photography Archive →</a>
+      <a href={`${base}/photography`} class="btn btn-secondary">Explore Complete Photography Archive →</a>
     </div>
   </section>
 
   <hr />
 
-  <!-- Section 4: About & Human Grounding -->
+  <!-- Section 4: About & Philosophy -->
   <section id="about" class="section">
     <div class="section-header">
       <div class="section-title-wrap">
-        <span class="section-glyph">🧭</span>
         <div>
-          <h2 class="section-title">About & Philosophy</h2>
+          <h2 class="section-title">About &amp; Orientation</h2>
           <span class="section-subtitle">Grounded in human capability and physical reality.</span>
         </div>
       </div>
@@ -187,10 +178,10 @@ const sortedEssays = essays.sort(
 
   <hr />
 
-  <!-- Section 5: Connect & Shared Light -->
+  <!-- Section 5: Connect -->
   <section id="connect" class="section">
     <div class="connect-card card">
-      <h2 class="connect-title">Connect & Follow the Light</h2>
+      <h2 class="connect-title">Connect &amp; Collaborate</h2>
       <p class="connect-desc">
         If you are working on cognitive tools, dynamic media, local-first software, or visual cartography, I would love to hear from you.
       </p>
@@ -204,7 +195,7 @@ const sortedEssays = essays.sort(
         <a href="https://github.com/MintyOrb" target="_blank" rel="noopener noreferrer" class="connect-btn">
           GitHub
         </a>
-        <a href="/rss.xml" class="connect-btn">
+        <a href={`${base}/rss.xml`} class="connect-btn">
           RSS Feed
         </a>
         <a href="mailto:hello@timborny.com" class="connect-btn primary">
@@ -322,13 +313,6 @@ const sortedEssays = essays.sort(
   .section-title-wrap {
     display: flex;
     align-items: flex-start;
-    gap: 0.75rem;
-  }
-
-  .section-glyph {
-    font-size: 1.5rem;
-    line-height: 1.2;
-    filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.3));
   }
 
   .section-title {
@@ -358,22 +342,6 @@ const sortedEssays = essays.sort(
     color: var(--text-muted);
     max-width: 640px;
     margin-bottom: 0.5rem;
-  }
-
-  /* Manifesto Card */
-  .manifesto-card {
-    background: rgba(245, 158, 11, 0.05);
-    border: 1px dashed rgba(245, 158, 11, 0.3);
-    border-radius: var(--radius);
-    padding: 1.1rem 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .manifesto-quote {
-    color: var(--lantern);
-    font-size: 0.98rem;
-    margin: 0;
-    text-align: center;
   }
 
   /* Essays Feed */

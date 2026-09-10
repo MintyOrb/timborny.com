@@ -17,12 +17,13 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
   month: 'short',
   day: 'numeric',
 }).format(essay.data.pubDate);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <BaseLayout title={`${essay.data.title} — Tim Borny`} description={essay.data.description}>
   <article class="essay-article">
     <div class="back-nav">
-      <a href="/writing" class="back-link">← Back to Field Notes</a>
+      <a href={`${base}/writing`} class="back-link">← Back to Field Notes</a>
     </div>
 
     <header class="essay-header">
@@ -46,9 +47,8 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     </div>
 
     <div class="essay-footer">
-      <div class="lantern-box">
-        <span class="box-icon">🏮</span>
-        <p>This is a working field note from <strong>Liminal Lantern</strong>. Ideas are exploratory and subject to iteration.</p>
+      <div class="note-box">
+        <p>Written by <strong>Tim Borny</strong>. Ideas are exploratory and subject to iteration.</p>
         <a href={`mailto:hello@timborny.com?subject=Re: ${encodeURIComponent(essay.data.title)}`} class="reply-button">Send a Thought via Email →</a>
       </div>
     </div>
@@ -159,7 +159,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     border-top: 1px solid var(--border);
   }
 
-  .lantern-box {
+  .note-box {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
@@ -171,11 +171,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     gap: 0.75rem;
   }
 
-  .box-icon {
-    font-size: 1.5rem;
-  }
-
-  .lantern-box p {
+  .note-box p {
     font-size: 0.92rem;
     margin: 0;
     max-width: 480px;

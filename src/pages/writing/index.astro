@@ -6,6 +6,7 @@ const essays = await getCollection('essays');
 const sortedEssays = essays.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <BaseLayout title="Field Notes & Essays — Tim Borny" description="Field notes on tools for thought, intelligent interfaces, and mapping reality.">
@@ -13,9 +14,9 @@ const sortedEssays = essays.sort(
     <header class="page-header">
       <div class="badge">
         <span class="badge-dot"></span>
-        Liminal Lantern Dispatches
+        Notes &amp; Dispatches
       </div>
-      <h1 class="page-title">Field Notes & Essays</h1>
+      <h1 class="page-title">Field Notes &amp; Essays</h1>
       <p class="page-desc">
         Explorations on cognitive tools, spatial AI interfaces, and multi-scale reality mapping.
       </p>
@@ -31,7 +32,7 @@ const sortedEssays = essays.sort(
         }).format(essay.data.pubDate);
 
         return (
-          <a href={`/writing/${slug}`} class="essay-item card">
+          <a href={`${base}/writing/${slug}`} class="essay-item card">
             <div class="item-meta">
               <span class="item-date">{formattedDate}</span>
               <span class="item-status">{essay.data.status}</span>

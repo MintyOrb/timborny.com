@@ -7,22 +7,26 @@ interface Props {
 
 const { limit } = Astro.props;
 const displayPhotos = limit ? curatedPhotos.slice(0, limit) : curatedPhotos;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <div class="photo-gallery">
   <div class="gallery-grid">
-    {displayPhotos.map((photo, index) => (
-      <figure class="photo-card" data-src={photo.src} data-alt={photo.alt}>
-        <img
-          src={photo.src}
-          alt={photo.alt}
-          loading="lazy"
-          decoding="async"
-          class="gallery-img"
-        />
-        <figcaption class="photo-caption">{photo.alt}</figcaption>
-      </figure>
-    ))}
+    {displayPhotos.map((photo) => {
+      const fullSrc = `${base}/${photo.src.replace(/^\//, '')}`;
+      return (
+        <figure class="photo-card" data-src={fullSrc} data-alt={photo.alt}>
+          <img
+            src={fullSrc}
+            alt={photo.alt}
+            loading="lazy"
+            decoding="async"
+            class="gallery-img"
+          />
+          <figcaption class="photo-caption">{photo.alt}</figcaption>
+        </figure>
+      );
+    })}
   </div>
 
   <!-- Native Lightbox Dialog -->
